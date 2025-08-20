@@ -1,0 +1,10 @@
+{
+    "name": "j-calculator-frontend",
+    "version": "1.0.0",
+    "description": "Frontend for Calculator",
+    "main": "src/index.js",
+    "scripts": {},
+    "devDependencies": {
+        "dotenv": "^16.4.5"
+    }
+}

@@ -10,16 +10,37 @@
     <b>CALCULATOR</b>
     <div id="calculator">
         <input type="text" id="display" disabled>
-        <div id="buttons">
-            <button onclick="appendNumber(1)">1</button>
-            <button onclick="appendNumber(2)">2</button>
-            <button onclick="appendNumber(3)">3</button>
-            <button onclick="setOperation('+')">+</button>
-            <button onclick="setOperation('*')">*</button>
-            <button onclick="setOperation('/')">/</button>
-            <button onclick="calculate()">=</button>
+        <div id="num_buttons">
+            <row>
+                <button id="btn-num-1" data-value="1">1</button>
+                <button id="btn-num-2" data-value="2">2</button>
+                <button id="btn-num-3" data-value="3">3</button>
+            </row>
+            <row>
+                <button id="btn-num-4" data-value="4">4</button>
+                <button id="btn-num-5" data-value="5">5</button>
+                <button id="btn-num-6" data-value="6">6</button>
+            </row>
+            <row>
+                <button id="btn-num-7" data-value="7">7</button>
+                <button id="btn-num-8" data-value="8">8</button>
+                <button id="btn-num-9" data-value="9">9</button>
+            </row>
+            <row>
+                <button id="btn-num-0" data-value="0">0</button>
+            </row>
+        </div>
+        <div id="operations_buttons">
+            <button id="btn-act-add" data-action="+">+</button>
+            <button id="btn-act-multiply" data-action="*">*</button>
+            <button id="btn-act-divide" data-action="/">/</button>
+            <button id="btn-act-equal" data-action="=">=</button>
+            <button id="btn-act-ac">AC</button>
         </div>
     </div>
-    <script src="index.js"></script>
+    <div id="history">
+        <h2>Calculation History</h2>
+    </div>
+    <script type="module" src="src/index.js"></script>
 </body>
 </html>

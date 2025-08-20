@@ -1,47 +1,30 @@
-let currentOperation = null;
-let firstOperand = null;
+import { initializeSession, resetSession } from './session.js';
+import { appendNumber, setOperation, calculate } from './calculation.js';
 
-function appendNumber(number) {
-    const display = document.getElementById('display');
-    display.value += number;
+console.log('Calculation Started!');
+
+document.addEventListener('DOMContentLoaded', () => {
+    initializeSession();
+
+    // Обработчики для цифровых кнопок
+    const numButtons = document.querySelectorAll('button[id^="btn-num-"]');
+    numButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            const value = button.getAttribute('data-value');
+            appendNumber(parseInt(value));
+        });
+    });
+
+    // Обработчики для кнопок действий
+    const actionButtons = document.querySelectorAll('button[id^="btn-act-"]');
+    actionButtons.forEach(button => {
+        const action = button.getAttribute('data-action');
+             if (action)                        { button.addEventListener('click', () => setOperation(action)); }
+        else if (button.id === 'btn-act-equal') { button.addEventListener('click', calculate); }
+        else if (button.id === 'btn-act-ac'   ) { button.addEventListener('click', resetSession); }
+    });
+});
+
+if (typeof module !== 'undefined' && typeof module.exports !== 'undefined') {
+    module.exports = { appendNumber, setOperation, calculate };
 }
-
-function setOperation(operation) {
-    const display = document.getElementById('display');
-    firstOperand = parseInt(display.value);
-    currentOperation = operation;
-    display.value = '';
-}
-
-function calculate() {
-    const display = document.getElementById('display');
-    const secondOperand = parseInt(display.value);
-
-    if (currentOperation === '+') {
-        fetch(`http://localhost:8080/api/calculator/add?a=${firstOperand}&b=${secondOperand}`)
-            .then(response => response.text())
-            .then(result => { 
-                display.value = result;
-                return result;
-             });
-    }
-    if (currentOperation === '*') {
-        fetch(`http://localhost:8080/api/calculator/multiply?a=${firstOperand}&b=${secondOperand}`)
-            .then(response => response.text())
-            .then(result => { 
-                display.value = result;
-                return result;
-             });
-    }
-    if (currentOperation === '/') {
-        fetch(`http://localhost:8080/api/calculator/devide?a=${firstOperand}&b=${secondOperand}`)
-            .then(response => response.text())
-            .then(result => { 
-                display.value = result;
-                return result;
-             });
-    }
-    return Promise.resolve();
-}
-
-module.exports = { appendNumber, setOperation, calculate };

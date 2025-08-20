@@ -12,7 +12,16 @@
     font-size: 18px;
 }
 
-#buttons button {
+#num_buttons button {
+    width: 50px;
+    height: 50px;
+    font-size: 18px;
+    margin: 5px;
+}
+
+#operations_buttons button {
+    color: black;
+    background-color: beige;
     width: 50px;
     height: 50px;
     font-size: 18px;

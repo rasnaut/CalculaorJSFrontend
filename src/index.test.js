@@ -1,4 +1,3 @@
-// Убедитесь, что jsdom используется
 const fs = require('fs');
 const path = require('path');
 const { JSDOM } = require('jsdom');
