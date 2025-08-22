@@ -19,9 +19,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const actionButtons = document.querySelectorAll('button[id^="btn-act-"]');
     actionButtons.forEach(button => {
         const action = button.getAttribute('data-action');
-             if (action)                        { button.addEventListener('click', () => setOperation(action)); }
-        else if (button.id === 'btn-act-equal') { button.addEventListener('click', calculate); }
+             if (button.id === 'btn-act-equal') { button.addEventListener('click', calculate); }
         else if (button.id === 'btn-act-ac'   ) { button.addEventListener('click', resetSession); }
+        else if (action)                        { button.addEventListener('click', () => setOperation(action)); }
     });
 });
 

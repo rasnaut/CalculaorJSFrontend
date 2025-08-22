@@ -15,6 +15,7 @@ ENV REACT_APP_BACKEND_URL=$REACT_APP_BACKEND_URL
 
 # Stage 2: Setup Nginx for processing static files
 FROM nginx:alpine
+RUN apk add --no-cache gettext
 
 WORKDIR /usr/share/nginx/html
 
@@ -22,9 +23,13 @@ WORKDIR /usr/share/nginx/html
 COPY --from=build /app/src ./src/    
 COPY --from=build /app/public .
 
+COPY public/config.template.js ./config.template.js
 COPY nginx.conf /etc/nginx/conf.d/default.conf
+COPY entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+
 
 EXPOSE 5002
 
 # Start Nginx
-CMD ["nginx", "-g", "daemon off;"]
+ENTRYPOINT ["/entrypoint.sh"]

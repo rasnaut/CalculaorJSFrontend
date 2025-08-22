@@ -1,0 +1,5 @@
+window.__APP_CONFIG__ = {
+  BACKEND_URL: "/api",
+  APP_STAGE: "${APP_STAGE}",
+  PUBLIC_SENTRY_DSN: "${PUBLIC_SENTRY_DSN}"
+};
