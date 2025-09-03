@@ -9,10 +9,6 @@ RUN npm install
 COPY src ./src
 COPY public ./public
 
-# set env variables
-ARG REACT_APP_BACKEND_URL
-ENV REACT_APP_BACKEND_URL=$REACT_APP_BACKEND_URL
-
 # Stage 2: Setup Nginx for processing static files
 FROM nginx:alpine
 RUN apk add --no-cache gettext
@@ -26,7 +22,8 @@ COPY --from=build /app/public .
 COPY public/config.template.js ./config.template.js
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 COPY entrypoint.sh /entrypoint.sh
-RUN chmod +x /entrypoint.sh
+RUN chmod +x /entrypoint.sh && sed -i 's/\r$//' /entrypoint.sh
+
 
 
 EXPOSE 5002
